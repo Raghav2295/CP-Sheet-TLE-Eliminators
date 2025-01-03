@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector> 
+#include <algorithm>
+#include <string>
+#include <queue>
+#include<map>
+#include<unordered_map>
+#include<set>
+#include <stack>
+#include<deque>
+#include<climits>
+#include<numeric>
+using namespace std; 
+
+void fastIO(){
+    ios_base::sync_with_stdio(false) ; 
+    cin.tie(NULL) ; 
+}
+
+#define ll long long 
+#define all(v) v.begin(),v.end() 
+#define rep(i,n) for(int i=0 ; i<n ; i++)
+#define repl(i,n) for(ll i=0 ; i<n ; i++)
+#define vi vector<int> 
+#define vc vector<char> 
+#define vll vector<long long> 
+#define sp " "
+#define nl endl 
+ 
+void solve(){
+    ll n , k , q ; cin>>n>>k>>q ; 
+    vll v(n) ; repl(i,n) cin>>v[i] ; 
+    //Code
+    ll intervalSize = 0 ; 
+    vector<ll> intervalSizes ; 
+    repl(i,n){
+        if(v[i]<=q){
+            intervalSize++ ; 
+        }
+        else{
+            if(intervalSize>=k) intervalSizes.push_back(intervalSize) ; 
+            intervalSize = 0 ; 
+        }
+        if(i==n-1){
+            if(intervalSize>=k) intervalSizes.push_back(intervalSize) ; 
+        }
+    }
+    ll ans = 0 ; 
+    ll m = intervalSizes.size() ; 
+    repl(i,m){
+        ll j = intervalSizes[i] - k + 1 ; 
+        ans+= (j*(j+1))/2 ; 
+    }
+    cout<<ans<<nl ; 
+}
+
+int main(){
+    fastIO() ; 
+    int t ; 
+    cin>>t ; 
+    while(t--){
+        solve() ;
+    }
+}
